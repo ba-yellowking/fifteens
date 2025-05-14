@@ -1,5 +1,5 @@
 import {fisherYates} from "./FisherYates.jsx";
-import {twoDArray} from "./twoDimensionArray.jsx";
+import {twoDArray} from "./TwoDimensionArray.jsx";
 import {isSolvable} from "./IsSolvable.jsx";
 
 // Формирование перемешанной доски
