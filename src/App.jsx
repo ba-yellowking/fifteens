@@ -9,7 +9,13 @@ import LeaderboardModal from "./components/modals/LeaderboardModal.jsx";
 
 function App() {
 
-  const [gameState, setGameState] = useState("stopped")
+  // started, paused, stopped
+  const [gameState, setGameState] = useState("stopped");
+
+  // active, inactive
+  const [boardState, setBoardState] = useState("");
+
+  const [isPaused, setIsPaused] = useState(false);
 
   // Лидерборд: хук и открытие
   const [isLeaderboardOpen, openLeaderboard, closeLeaderboard] = useModal();
@@ -25,7 +31,17 @@ function App() {
   const handleShuffleTiles = () => {
     shuffleTiles(setTiles);
     setGameState("started");
+    setBoardState("active");
   };
+
+  // Функциональное обновление (с return) - нужно, чтобы реакт работал с текущим значением isPaused, setIsPaused
+  const handlePause = () => {
+    setIsPaused(prev => {
+      const newPaused = !prev;
+      setGameState(newPaused ? "paused" : "started");
+      return newPaused;
+    })
+  }
 
   return (
     <div className="fifteens">
@@ -36,13 +52,14 @@ function App() {
               <Tile
                 key={`${rowIndex}-${colIndex}`}
                 tile={tile}
-                onClick={() => moveTile(rowIndex, colIndex, tiles, setTiles, gameState)}
+                onClick={() => moveTile(rowIndex, colIndex, tiles, setTiles, gameState, setBoardState)}
               />
             ))
           ))}
         </div>
       </div>
       <button onClick={handleShuffleTiles}>Start</button>
+      <button onClick={handlePause}>Pause</button>
       <button onClick={handleLeaderboard}>Leaderboard</button>
 
       <LeaderboardModal

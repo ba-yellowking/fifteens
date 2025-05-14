@@ -1,12 +1,12 @@
 import {findEmptyTile} from "./FindEmptyTile.jsx";
 
 // Передвижение числа в пустую ячейку
-export function moveTile(row, col, tiles, setTiles, gameState) {
+export function moveTile(row, col, tiles, setTiles, gameState, setBoardState) {
   const emptyTile = findEmptyTile(tiles);
   const emptyRow = emptyTile.row;
   const emptyCol = emptyTile.col;
 
-  if (gameState === "started") {
+  if (gameState === "started" && gameState !== "paused") {
     if (
       row === emptyRow && (col === emptyCol - 1 || col === emptyCol + 1) ||
       col === emptyCol && (row === emptyRow - 1 || row === emptyRow + 1)
@@ -16,5 +16,7 @@ export function moveTile(row, col, tiles, setTiles, gameState) {
       newTiles[row][col] = 0;
       setTiles(newTiles);
     }
+  } else {
+    setBoardState("inactive");
   }
 }
