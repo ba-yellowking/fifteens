@@ -74,6 +74,7 @@ function App() {
       [13, 14, 15, 0]
     ]);
   };
+  
 
   return (
     <div className="fifteens">
