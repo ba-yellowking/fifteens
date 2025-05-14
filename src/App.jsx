@@ -1,27 +1,23 @@
 import "./App.css";
 import Tile from "./ui/tile/Tile.jsx";
 import {useEffect, useState} from "react";
-import {shuffleTiles} from "./utils/ShuffleTiles.jsx";
 import {moveTile} from "./utils/MoveTile.jsx";
-import Modal from "./ui/modal/Modal.jsx";
 import useModal from "./hooks/useModal.jsx";
 import LeaderboardModal from "./components/modals/LeaderboardModal.jsx";
 import {formatTimer} from "./utils/FormatTimer.jsx";
+import {handleShuffleTiles, handlePause, handleExit} from "./handlers/Handlers.js";
 
 function App() {
 
-  // started, paused, stopped
-  const [gameState, setGameState] = useState("stopped");
+  const [gameState, setGameState] = useState("stopped"); // started, paused, stopped
   const [isPaused, setIsPaused] = useState(false);
-
-  // active, inactive
-  const [boardState, setBoardState] = useState("");
-
-  // counter
+  const [boardState, setBoardState] = useState(""); // active, inactive
   const [moveCounter, setMoveCounter] = useState(0);
 
-  // timer
-  const [time, setTime] = useState(0);
+  const [isLeaderboardOpen, openLeaderboard, closeLeaderboard] = useModal(); // leaderboard hook
+  const handleLeaderboard = () => {openLeaderboard();}; // open modal
+
+  const [time, setTime] = useState(0); // timer
   useEffect(() => {
     let interval;
     if (gameState === "started") {
@@ -32,10 +28,6 @@ function App() {
     return () => clearInterval(interval)
   }, [gameState])
 
-  // Лидерборд: хук и открытие модального окна
-  const [isLeaderboardOpen, openLeaderboard, closeLeaderboard] = useModal();
-  const handleLeaderboard = () => {openLeaderboard();};
-
   const [tiles, setTiles] = useState([
     [1, 2, 3, 4],
     [5, 6, 7, 8],
@@ -43,38 +35,6 @@ function App() {
     [13, 14, 15, 0]
   ])
 
-  // Перемешиваем массив
-  const handleShuffleTiles = () => {
-    shuffleTiles(setTiles, tiles, boardState);
-    setGameState("started");
-    setBoardState("active");
-    setMoveCounter(0);
-  };
-
-  // Пауза. Функциональное обновление (см. return) - используем текущее значение isPaused, setIsPaused
-  const handlePause = () => {
-    setIsPaused(prev => {
-      const newPaused = !prev;
-      setGameState(newPaused ? "paused" : "started");
-      return newPaused;
-    });
-    setBoardState("inactive")
-  }
-
-  // Выход из игры. Сброс времени, ходов, возврат на начальный экран
-  const handleExit = () => {
-    setBoardState("");
-    setGameState("stopped");
-    setTime(0);
-    setMoveCounter(0);
-    setTiles([
-      [1, 2, 3, 4],
-      [5, 6, 7, 8],
-      [9, 10, 11, 12],
-      [13, 14, 15, 0]
-    ]);
-  };
-  
 
   return (
     <div className="fifteens">
@@ -92,15 +52,7 @@ function App() {
               <Tile
                 key={`${rowIndex}-${colIndex}`}
                 tile={tile}
-                onClick={() => moveTile(
-                  rowIndex,
-                  colIndex,
-                  tiles,
-                  setTiles,
-                  gameState,
-                  setBoardState,
-                  setMoveCounter,
-                )}
+                onClick={() => moveTile(rowIndex, colIndex, tiles, setTiles, gameState, setBoardState, setMoveCounter)}
               />
             ))
           ))}
@@ -112,9 +64,9 @@ function App() {
           {/*Добавляем условие if, поэтому () => {}*/}
           <button className="btn" onClick={() => {
             if (gameState === "stopped") {
-              handleShuffleTiles();
+              handleShuffleTiles(setTiles, tiles, boardState, setGameState, setBoardState, setMoveCounter);
             } else {
-              handlePause();
+              handlePause(isPaused, setIsPaused, setGameState, setBoardState);
             }
           }}>
             {gameState === "stopped"
@@ -124,7 +76,9 @@ function App() {
                 : "Pause"}
           </button>
 
-          <button className="btn" onClick={handleExit}>Exit</button>
+          <button className="btn" onClick={() => {
+            handleExit(setBoardState, setGameState, setTime, setMoveCounter, setTiles)
+          }}>Exit</button>
         </div>
 
       </div>
