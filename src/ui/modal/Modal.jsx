@@ -11,9 +11,9 @@ function Modal(props) {
       <div className="modal__shade" onClick={props.close}>
         <div className="modal__content" onClick={handleModalContent}>
           {props.children}
-          <span className="modal__close" onClick={props.close}>
-            &times;
-          </span>
+          {/*<span className="modal__close" onClick={props.close}>*/}
+          {/*  &times;*/}
+          {/*</span>*/}
         </div>
       </div>
     </div>
