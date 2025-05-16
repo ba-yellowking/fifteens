@@ -103,6 +103,7 @@ function App() {
           handleExit(setBoardState, setGameState, setTime, setMoveCounter, setTiles, setVictoryState, setIsPaused)
         }}>Exit</button>
 
+        {/*Кнопка для быстрой проверки завершения игры*/}
         {/*<button onClick={() => {*/}
         {/*  setTiles(victoryPattern);*/}
         {/*  setVictoryState("achieved");*/}
