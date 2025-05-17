@@ -36,6 +36,11 @@ npm install
 npm start
 ```
 
+# Roadmap
+- Improve responsive layout for mobile and tablet
+- Add effects when winning the game (e.g. confetti, animation, sound)
+- Add subtle background animation or parallax effect for atmosphere
+
 --- --- --- --- --- --- --- --- --- --- --- --- 
 
 # Пятнашки
@@ -74,3 +79,9 @@ npm install
 
 # Запустить локально
 npm start
+```
+
+# Планы по улучшению
+- Создать адаптивную верстку для мобильных устройств и планшетов
+- Добавить эффекты при победе (конфетти, анимации, звуки)
+- Добавить фоновое изображение (анимацию или параллакс эффект)
