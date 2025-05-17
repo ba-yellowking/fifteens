@@ -1,17 +1,22 @@
 import "./App.css";
-import Tile from "./ui/tile/Tile.jsx";
 import {useEffect, useState} from "react";
 import useModal from "./hooks/useModal.jsx";
 import LeaderboardModal from "./components/modals/LeaderboardModal.jsx";
-import {formatTimer} from "./utils/FormatTimer.jsx";
-import {handleShuffleTiles, handlePause, handleExit} from "./handlers/Handlers.jsx";
 import InputLeaderboardModal from "./components/modals/InputLeaderboardModal.jsx";
 import {handleTileClick} from "./handlers/Handlers.jsx";
 import Board from "./components/board/Board.jsx";
 import Header from "./components/header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
+import './i18n.jsx';
+import {useTranslation} from "react-i18next";
 
 function App() {
+
+  const { i18n } = useTranslation();
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "ru" ? "en" : "ru";
+    i18n.changeLanguage(newLang);
+  };
 
   const [gameState, setGameState] = useState("stopped"); // started, paused, stopped
   const [boardState, setBoardState] = useState("inactive"); // active, inactive
@@ -58,6 +63,7 @@ function App() {
         handleLeaderboard={handleLeaderboard}
         moveCounter={moveCounter}
         time={time}
+        toggleLanguage={toggleLanguage}
       />
 
       <Board
@@ -86,12 +92,12 @@ function App() {
       />
 
       {/*Кнопка для быстрой проверки завершения игры*/}
-      <button onClick={() => {
-        setVictoryState("achieved");
-        setShowInputLeader(true);
-      }}>
-        Завершить игру
-      </button>
+      {/*<button onClick={() => {*/}
+      {/*  setVictoryState("achieved");*/}
+      {/*  setShowInputLeader(true);*/}
+      {/*}}>*/}
+      {/*  Завершить игру*/}
+      {/*</button>*/}
 
       <LeaderboardModal
         isOpen={isLeaderboardOpen}

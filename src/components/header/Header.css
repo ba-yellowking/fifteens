@@ -10,9 +10,16 @@
 
 .results {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.results p {
+.time {
     padding: 10px;
-    width: 120px;
+    width: 150px;
+}
+
+.moves {
+    padding: 10px;
+    width: 100px;
 }

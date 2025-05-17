@@ -1,11 +1,15 @@
 import "./Footer.css";
 import {handleExit, handlePause, handleShuffleTiles} from "../../handlers/Handlers.jsx";
+import {useTranslation} from "react-i18next";
 
 function Footer(
   {
     gameState, victoryState, setTiles, tiles, boardState, setGameState, setBoardState, setMoveCounter, setTime,
     setVictoryState, isPaused, setIsPaused
   }) {
+
+  const { t } = useTranslation();
+
   return (
     <div className="footer">
       {/*Добавляем условие if, поэтому () => {}*/}
@@ -17,15 +21,15 @@ function Footer(
         }
       }}>
         {gameState === "stopped" || victoryState === "achieved"
-          ? "Start"
+          ? t("start")
           : isPaused
-            ? "Continue"
-            : "Pause"}
+            ? t("continue")
+            : t("pause")}
       </button>
 
       <button className={`btn btn-small ${victoryState === "achieved" || gameState === "stopped" ? "hidden" : ""}`} onClick={() => {
         handleExit(setBoardState, setGameState, setTime, setMoveCounter, setTiles, setVictoryState, setIsPaused)
-      }}>Exit</button>
+      }}>{t("exit")}</button>
 
     </div>
   )

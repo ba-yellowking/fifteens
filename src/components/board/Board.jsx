@@ -2,6 +2,7 @@ import "./Board.css";
 import Tile from "../../ui/tile/Tile.jsx";
 
 function Board({ tiles, onTileClick }) {
+
   return (
     <div className="body">
       <div className="board">
