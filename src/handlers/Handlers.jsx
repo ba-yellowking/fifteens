@@ -1,4 +1,5 @@
 import {shuffleTiles} from "../utils/ShuffleTiles.jsx";
+import {moveTile} from "../utils/MoveTile.jsx";
 
 // Перемешиваем массив
 export const handleShuffleTiles = (setTiles, tiles, boardState, setGameState, setBoardState, setMoveCounter, setTime, setVictoryState) => {
@@ -39,4 +40,14 @@ export const handleExit = (setBoardState, setGameState, setTime, setMoveCounter,
     ["⠀", "⠀", "⠀", 0]
   ]);
   setIsPaused(false);
+};
+
+export const handleTileClick = (
+  rowIndex, colIndex, tiles, setTiles, gameState, setBoardState, setMoveCounter, victoryState, setVictoryState,
+  showInputLeader, setShowInputLeader
+) => {
+  moveTile(
+    rowIndex, colIndex, tiles, setTiles, gameState, setBoardState, setMoveCounter, victoryState, setVictoryState,
+    showInputLeader, setShowInputLeader
+  );
 };

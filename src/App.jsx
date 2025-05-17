@@ -1,12 +1,15 @@
 import "./App.css";
 import Tile from "./ui/tile/Tile.jsx";
 import {useEffect, useState} from "react";
-import {moveTile} from "./utils/MoveTile.jsx";
 import useModal from "./hooks/useModal.jsx";
 import LeaderboardModal from "./components/modals/LeaderboardModal.jsx";
 import {formatTimer} from "./utils/FormatTimer.jsx";
 import {handleShuffleTiles, handlePause, handleExit} from "./handlers/Handlers.jsx";
 import InputLeaderboardModal from "./components/modals/InputLeaderboardModal.jsx";
+import {handleTileClick} from "./handlers/Handlers.jsx";
+import Board from "./components/board/Board.jsx";
+import Header from "./components/header/Header.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 function App() {
 
@@ -22,15 +25,6 @@ function App() {
   const [isPaused, setIsPaused] = useState(false);
   const handleLeaderboard = () => {openLeaderboard();}; // open modal
   const [showInputLeader, setShowInputLeader] = useState(false);
-
-
-  const victoryPattern = [
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [13, 14, 15, 0]
-  ];
-
 
   // timer
   useEffect(() => {
@@ -48,7 +42,6 @@ function App() {
     return () => clearInterval(interval);
   }, [gameState, victoryState]);
 
-
   // default board
   const [tiles, setTiles] = useState([
     ["⠀", "⠀", "⠀", "⠀"],
@@ -61,58 +54,44 @@ function App() {
   return (
     <div className="fifteens">
 
-      <div className="header">
-        <button className="btn" onClick={handleLeaderboard}>Top-15</button>
-        <div className="results">
-          <p className="results-moves">{`Moves: ${moveCounter}`}</p>
-          <p className="results-time">{`Time: ${formatTimer(time)}`}</p>
-        </div>
-      </div>
+      <Header
+        handleLeaderboard={handleLeaderboard}
+        moveCounter={moveCounter}
+        time={time}
+      />
 
-      <div className="container">
-        <div className="field">
-          {tiles.map((row, rowIndex) => (
-            row.map((tile, colIndex) => (
-              <Tile
-                key={`${rowIndex}-${colIndex}`}
-                tile={tile}
-                onClick={() => moveTile(rowIndex, colIndex, tiles, setTiles, gameState, setBoardState, setMoveCounter, victoryState, setVictoryState, victoryPattern, showInputLeader, setShowInputLeader)}
-              />
-            ))
-          ))}
-        </div>
-      </div>
+      <Board
+        tiles={tiles}
+        onTileClick={(rowIndex, colIndex) =>
+          handleTileClick(
+            rowIndex, colIndex, tiles, setTiles, gameState, setBoardState, setMoveCounter, victoryState, setVictoryState,
+            showInputLeader, setShowInputLeader
+          )
+        }
+      />
 
-      <div className="footer">
-        {/*Добавляем условие if, поэтому () => {}*/}
-        <button className="btn" onClick={() => {
-          if (gameState === "stopped" || victoryState === "achieved") {
-            handleShuffleTiles(setTiles, tiles, boardState, setGameState, setBoardState, setMoveCounter, setTime, setVictoryState);
-          } else {
-            handlePause(isPaused, setIsPaused, setGameState, setBoardState, boardState, gameState);
-          }
-        }}>
-          {gameState === "stopped" || victoryState === "achieved"
-            ? "Start"
-            : isPaused
-              ? "Continue"
-              : "Pause"}
-        </button>
+      <Footer
+        gameState={gameState}
+        victoryState={victoryState}
+        setTiles={setTiles}
+        tiles={tiles}
+        boardState={boardState}
+        setGameState={setGameState}
+        setBoardState={setBoardState}
+        setMoveCounter={setMoveCounter}
+        setTime={setTime}
+        setVictoryState={setVictoryState}
+        isPaused={isPaused}
+        setIsPaused={setIsPaused}
+      />
 
-        <button className={`btn ${victoryState === "achieved" || gameState === "stopped" ? "hidden" : ""}`} onClick={() => {
-          handleExit(setBoardState, setGameState, setTime, setMoveCounter, setTiles, setVictoryState, setIsPaused)
-        }}>Exit</button>
-
-        {/*Кнопка для быстрой проверки завершения игры*/}
-        {/*<button onClick={() => {*/}
-        {/*  setTiles(victoryPattern);*/}
-        {/*  setVictoryState("achieved");*/}
-        {/*  setShowInputLeader(true);*/}
-        {/*}}>*/}
-        {/*  Завершить игру*/}
-        {/*</button>*/}
-
-      </div>
+      {/*Кнопка для быстрой проверки завершения игры*/}
+      <button onClick={() => {
+        setVictoryState("achieved");
+        setShowInputLeader(true);
+      }}>
+        Завершить игру
+      </button>
 
       <LeaderboardModal
         isOpen={isLeaderboardOpen}

@@ -1,0 +1,15 @@
+.body {
+    width: 500px;
+    height: 500px;
+    background-color: #fbfbfb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid #f4f4f4;
+}
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}

@@ -68,18 +68,19 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 .leaderboard__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     padding: 16px;
 }
 .leaderboard__item {
-    margin: 10px;
+    word-wrap: break-word;
+    width: 150px;
     border: 1px solid #f3f3f3;
     padding: 10px;
 }
@@ -89,17 +90,6 @@
     align-items: flex-start;
     width: 100%;
     border-top: 1px solid #e9ecef;
-}
-.clearResults {
-    margin: 10px;
-    width: 150px;
-    height: 38px;
-    outline: none;
-    border: none;
-    background-color: #80a5cc;
-    color: #ffffff;
-    border-radius: 2px;
-    cursor: pointer;
 }
 
 

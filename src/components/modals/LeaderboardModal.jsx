@@ -47,7 +47,7 @@ function LeaderboardModal({ isOpen, close }) {
         </div>
 
         <div className="leaderboard__footer">
-          <button onClick={handleClear} className="clearResults">Очистить данные</button>
+          <button onClick={handleClear} className="btn btn-medium">Очистить данные</button>
         </div>
       </div>
     </Modal>
