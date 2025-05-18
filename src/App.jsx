@@ -31,6 +31,8 @@ function App() {
   const handleLeaderboard = () => {openLeaderboard();}; // open modal
   const [showInputLeader, setShowInputLeader] = useState(false);
 
+  const [isLimited, setIsLimited] = useState(false);
+
   // timer
   useEffect(() => {
     let interval;
@@ -103,6 +105,7 @@ function App() {
         isOpen={isLeaderboardOpen}
         open={openLeaderboard}
         close={closeLeaderboard}
+        setIsLimited={setIsLimited}
       />
 
       <InputLeaderboardModal
@@ -110,6 +113,8 @@ function App() {
         close={() => { setShowInputLeader(false); }}
         moveCounter={moveCounter}
         time={time}
+        isLimited={isLimited}
+        setIsLimited={setIsLimited}
       />
 
     </div>

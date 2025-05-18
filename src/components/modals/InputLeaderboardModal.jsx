@@ -2,11 +2,13 @@ import Modal from "../../ui/modal/Modal.jsx";
 import {formatTimer} from "../../utils/FormatTimer.jsx";
 import {useState} from "react";
 import LeaderboardModal from "./LeaderboardModal.jsx";
+import {useTranslation} from "react-i18next";
 
-function InputLeaderboardModal({ isOpen, close, moveCounter, time }) {
+function InputLeaderboardModal({ isOpen, close, moveCounter, time, isLimited, setIsLimited }) {
+
+  const { t } = useTranslation();
 
   const [name, setName] = useState("");
-  const [isLimited, setIsLimited] = useState(false);
 
   function submitWinInfo() {
 
@@ -35,25 +37,25 @@ function InputLeaderboardModal({ isOpen, close, moveCounter, time }) {
       <Modal open={isOpen} close={close}>
         <div className="input__modal">
           <div className="input__header">
-            <h3 className="input__title">Победа!</h3>
+            <h3 className="input__title">{t("victory")}</h3>
           </div>
 
           <div className="input__body">
-            <p>{`Время: ${formatTimer(time)}`}</p>
-            <p>{`Ходов: ${moveCounter}`}</p>
+            <p>{`${t("time")}: ${formatTimer(time)}`}</p>
+            <p>{`${t("moves")}: ${moveCounter}`}</p>
           </div>
 
           <div className="input__footer">
             <input
               type="text"
               className="input__name"
-              placeholder="Введите имя в таблицу рекордов"
+              placeholder={t("placeholder")}
               value={name}
               onChange={(event) => setName(event.target.value)}
             />
 
             <button className={`${isLimited ? "btn-inactive" : "input__save"}`} onClick={submitWinInfo}>
-              Сохранить
+              {isLimited ? t("isLimited") : t("save")}
             </button>
           </div>
         </div>

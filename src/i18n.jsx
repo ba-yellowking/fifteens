@@ -17,6 +17,15 @@ const resources = {
       pause: "Pause",
       continue: "Continue",
       exit: "Exit",
+
+      // leaderboard
+      save: "Save",
+      isLimited: "Limit exceeded",
+      placeholder: "Enter your name to the leaderboard",
+      leaderboard: "Leaderboard",
+      resetData: "Reset",
+      noResults: "No results",
+      victory: "Winner!"
     }
   },
   ru: {
@@ -32,18 +41,27 @@ const resources = {
       pause: "Пауза",
       continue: "Продолжить",
       exit: "Выход",
+
+      // leaderboard
+      save: "Сохранить",
+      isLimited: "Превышен лимит",
+      placeholder: "Введите имя в таблицу рекордов",
+      leaderboard: "Таблица рекордов",
+      resetData: "Очистить данные",
+      noResults: "Нет результатов",
+      victory: "Победа!"
     }
   }
 };
 
 i18n
-  .use(initReactI18next) // подключаем react-i18next
+  .use(initReactI18next)
   .init({
     resources,
-    lng: 'ru', // язык по умолчанию
-    fallbackLng: 'en',
+    lng: 'en',
+    fallbackLng: 'ru',
     interpolation: {
-      escapeValue: false // React уже экранирует
+      escapeValue: false
     }
   });
 
