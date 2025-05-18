@@ -2,7 +2,7 @@
 
 15 Puzzle Game is a classic logic puzzle featuring a 4x4 grid where you rearrange numbered tiles from 1 to 15 by sliding them into an empty space. Your goal is to organize the tiles in ascending order.
 
-# Features
+## Features
 
 - Clean and intuitive UI displaying the number of moves and elapsed time.
 - Leaderboard with top 15 best scores, including player name input.
@@ -10,36 +10,26 @@
 - Game controls: Start, Pause, and Exit.
 - Smooth animations combined with a friendly and modern design.
   
-# How to Play
+## How to Play
 
 - Press Start to begin the game.
 - Slide tiles into the empty cell to arrange numbers from 1 to 15 in order.
 - When you complete the puzzle, save your score to the leaderboard.
 
-# Technical Details
+## Technical Details
 
 - Built with JavaScript using React v19.1.0.0.
 - State management through React hooks: useState and useEffect.
 - Multi-language support implemented with the i18n library.
 - Styling follows the BEM (Block Element Modifier) methodology for clear CSS structure.
-  
-# Getting Started
 
-```bash
-# Clone the repository
-https://github.com/ba-yellowking/fifteens.git
-
-# Install dependencies
-npm install
-
-# Run the app locally
-npm start
-```
-
-# Roadmap
+## Roadmap
 - Improve responsive layout for mobile and tablet
 - Add effects when winning the game (e.g. confetti, animation, sound)
 - Add subtle background animation or parallax effect for atmosphere
+
+## Screenshot
+<img src="./public/screenshotRU.png" alt="15 Puzzle Screenshot" width="400"/>
 
 --- --- --- --- --- --- --- --- --- --- --- --- 
 
@@ -68,20 +58,10 @@ npm start
 - Для поддержки переключения языков использована библиотека **i18n**.
 - CSS оформлен по методологии **BEM** (Block Element Modifier)
 
-## Запуск проекта
-
-```bash
-# Клонировать репозиторий
-https://github.com/ba-yellowking/fifteens.git
-
-# Установить зависимости
-npm install
-
-# Запустить локально
-npm start
-```
-
 # Планы по улучшению
 - Создать адаптивную верстку для мобильных устройств и планшетов
 - Добавить эффекты при победе (конфетти, анимации, звуки)
 - Добавить фоновое изображение (анимацию или параллакс эффект)
+
+## Скриншот
+<img src="./public/screenshotEN.png" alt="15 Puzzle Screenshot" width="400"/>
