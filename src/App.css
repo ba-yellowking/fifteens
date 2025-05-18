@@ -46,3 +46,18 @@
 .btn.hidden {
     visibility: hidden;
 }
+.btn-inactive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    padding: 20px;
+    margin: 10px;
+    outline: none;
+    border: none;
+    background-color: #cccccc;
+    color: #ffffff;
+    border-radius: 2px;
+    cursor: default;
+    transition: background-color 0.3s ease-in-out;
+}

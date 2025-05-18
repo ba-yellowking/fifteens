@@ -6,20 +6,27 @@ import LeaderboardModal from "./LeaderboardModal.jsx";
 function InputLeaderboardModal({ isOpen, close, moveCounter, time }) {
 
   const [name, setName] = useState("");
+  const [isLimited, setIsLimited] = useState(false);
 
   function submitWinInfo() {
-    const newResult = {
-      name,
-      time,
-      moveCounter,
-    };
 
     const storedResults = JSON.parse(localStorage.getItem("leaderboard")) || [];
-    storedResults.push(newResult);
-    localStorage.setItem("leaderboard", JSON.stringify(storedResults));
 
-    close();
-    setName("");
+    if (storedResults.length < 15) {
+      const newResult = {
+        name,
+        time,
+        moveCounter,
+      };
+
+      storedResults.push(newResult);
+      localStorage.setItem("leaderboard", JSON.stringify(storedResults));
+
+      close();
+      setName("");
+    } else {
+      setIsLimited(true);
+    }
   }
 
 
@@ -45,7 +52,7 @@ function InputLeaderboardModal({ isOpen, close, moveCounter, time }) {
               onChange={(event) => setName(event.target.value)}
             />
 
-            <button className="input__save" onClick={submitWinInfo}>
+            <button className={`${isLimited ? "btn-inactive" : "input__save"}`} onClick={submitWinInfo}>
               Сохранить
             </button>
           </div>
