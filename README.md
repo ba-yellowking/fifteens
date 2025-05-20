@@ -29,7 +29,8 @@
 - Add subtle background animation or parallax effect for atmosphere
 
 ## Screenshot
-<img src="./public/screenshotRU.png" alt="15 Puzzle Screenshot" width="400"/>
+<img src="./public/screenshot-main-en.png" alt="15 Puzzle Screenshot" width="400"/>
+<img src="./public/screenshot-leaderboard-en.png" alt="15 Puzzle Screenshot" width="400"/>
 
 --- --- --- --- --- --- --- --- --- --- --- --- 
 
@@ -64,4 +65,5 @@
 - Добавить фоновое изображение (анимацию или параллакс эффект)
 
 ## Скриншот
-<img src="./public/screenshotEN.png" alt="15 Puzzle Screenshot" width="400"/>
+<img src="./public/screenshot-leaderboard-ru.png" alt="15 Puzzle Screenshot" width="400"/>
+<img src="./public/screenshot-main-ru.png" alt="15 Puzzle Screenshot" width="400"/>

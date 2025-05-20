@@ -91,15 +91,8 @@ function App() {
         setVictoryState={setVictoryState}
         isPaused={isPaused}
         setIsPaused={setIsPaused}
+        setShowInputLeader={setShowInputLeader}
       />
-
-      {/*Кнопка для быстрой проверки завершения игры*/}
-      <button onClick={() => {
-        setVictoryState("achieved");
-        setShowInputLeader(true);
-      }}>
-        Завершить игру
-      </button>
 
       <LeaderboardModal
         isOpen={isLeaderboardOpen}

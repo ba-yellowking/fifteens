@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next";
 function Footer(
   {
     gameState, victoryState, setTiles, tiles, boardState, setGameState, setBoardState, setMoveCounter, setTime,
-    setVictoryState, isPaused, setIsPaused
+    setVictoryState, isPaused, setIsPaused, setShowInputLeader
   }) {
 
   const { t } = useTranslation();
@@ -30,6 +30,14 @@ function Footer(
       <button className={`btn btn-small ${victoryState === "achieved" || gameState === "stopped" ? "hidden" : ""}`} onClick={() => {
         handleExit(setBoardState, setGameState, setTime, setMoveCounter, setTiles, setVictoryState, setIsPaused)
       }}>{t("exit")}</button>
+
+      {/*Кнопка для быстрой проверки завершения игры*/}
+      {/*<button className="btn" onClick={() => {*/}
+      {/*  setVictoryState("achieved");*/}
+      {/*  setShowInputLeader(true);*/}
+      {/*}}>*/}
+      {/*  Завершить игру*/}
+      {/*</button>*/}
 
     </div>
   )
